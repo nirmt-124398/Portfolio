@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Neutral Grayscale Theme System */
+  --color-bg: #151515;       /* Main background */
+  --color-surface: #1a1a1a;  /* Secondary background/cards */
+  
+  --color-text-primary: #eeeeee;
+  --color-text-secondary: #999999;
+  --color-text-muted: #444444;
+  --color-border: #333333;
+
+  /* Accent Color Map (Change this block to swap branding) */
+  --color-accent: #ff6600;       /* YC Orange */
+  --color-accent-hover: #cc5200;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    
+    /* Smooth transitions for theme/color changes */
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Layout: Max-width 1120px container */
+  .container-main {
+    width: 100%;
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  /* Minimal Component Styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-3 min-h-[44px] font-medium cursor-pointer;
+    border-radius: 2px;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* Primary Accent Button */
+  .btn-primary {
+    background-color: var(--color-accent);
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-accent-hover);
+  }
+
+  /* Secondary Neutral Button */
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-text-primary);
+    background-color: rgba(255, 255, 255, 0.05); /* Slight white tint */
+  }
 }
